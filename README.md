@@ -10,7 +10,7 @@
   oc adm policy add-scc-to-user anyuid -z default -n myproject --as system:admin 
 
 * Create a secret for accessing private image:
-  oc create secret docker-registry secret --docker-server=https://index.docker.io/v1/ --docker-username=<username> --docker-password=<password> --docker-email=ihub448@gmail.com
+  oc create secret docker-registry secret --docker-server=https://index.docker.io/v1/ --docker-username= --docker-password= --docker-email=ihub448@gmail.com
 
 * Navigate to helm chart directory and run below command to deploy backend pods on openshift
   helm install <name> <Backend-chart>
