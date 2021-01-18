@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend 
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - image:  bamfihub/baggregator:ag2
+        imagePullPolicy: Always
+        name: frontend
+        ports:
+        - name: frontend
+          containerPort: 8080
+        env:
+        - name: SEARCH_URI
+          valueFrom:
+            configMapKeyRef:
+              name: frontend-config
+              key: search-uri
+        - name: SYSTEM_URI
+          valueFrom:
+            configMapKeyRef:
+              name: frontend-config
+              key: system-uri
+        - name: QNA_URI
+          valueFrom:
+            configMapKeyRef:
+              name: frontend-config
+              key: qna-uri	
+        - name: QUESTION_URI
+          valueFrom:
+            configMapKeyRef:
+              name: frontend-config
+              key: question-uri				  
+      imagePullSecrets:
+      - name: secret 
+
+              
+

@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongodb
+    spec:
+      containers:
+        - image: mongo
+          env:
+          - name: MONGO_INITDB_DATABASE
+            value: test_db
+          name: mongodb
+          ports:
+            - name: mongodb
+              containerPort: 27017
+         

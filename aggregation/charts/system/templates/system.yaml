@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: system
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: system 
+  template:
+    metadata:
+      labels:
+        app: system
+    spec:
+      containers:
+      - image:  bamfihub/baggregator:system-serv-test
+        imagePullPolicy: Always
+        name: system
+        ports:
+        - name: system
+          containerPort: 8080
+        env:
+        - name: MONGODB_URI
+          valueFrom:
+            secretKeyRef:
+              name: system-secret
+              key: mongodb-uri
+      imagePullSecrets:
+      - name: secret
